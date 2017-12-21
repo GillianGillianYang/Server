@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const http = require('http');
+const router = require('./router');
 
 //App setup
 const app = express();
@@ -13,7 +14,8 @@ app.use(morgan('combined')); //login framwork
 //  而且 urlencoded的bodyParser還必須設定在 json的bodyParser之前
  app.use(bodyParser.urlencoded({ extended: false }));
  app.use(bodyParser.json({type:'*/*'})); 
-
+ 
+ router(app);   // build the router, body-parser的所有設定都必須在這行之前完成
 
 // server setup
 const PORT = process.env.PORT || 3090;
