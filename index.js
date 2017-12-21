@@ -6,6 +6,14 @@ const http = require('http');
 
 //App setup
 const app = express();
+app.use(morgan('combined')); //login framwork 
+//  body-parser可以用多個  像 14行就是 解析 x-www-form-urlencoded用的bodyParser
+//  不寫14行，這個express server就沒辦法接  x-www-form-urlencoded用的bodyParser型態的request,
+//  req.body.requestParameterName....   body會變undefined
+//  而且 urlencoded的bodyParser還必須設定在 json的bodyParser之前
+ app.use(bodyParser.urlencoded({ extended: false }));
+ app.use(bodyParser.json({type:'*/*'})); 
+
 
 // server setup
 const PORT = process.env.PORT || 3090;
@@ -18,3 +26,8 @@ server.listen(PORT,()=>{
 // app.listen(PORT,()=>{
 //     console.log(`server has start up on port :${PORT}`);
 // });    
+
+app.post('/',(req,res,next)=>{
+        console.log('theName :',req.body.name);  
+        res.send('you are pretty good');
+    });
