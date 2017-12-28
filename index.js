@@ -9,6 +9,8 @@ const router = require('./router');
 
 //App setup
 const app = express();
+
+//DB setup
 mongoose.connect('mongodb://localhost/auth201712',{useMongoClient:true});
 mongoose.Promise = global.Promise;
 
