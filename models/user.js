@@ -1,10 +1,10 @@
-import mongoose from 'mongoose';
+//import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const schema = mongoose.schema;
 
 // define our model
 const userSchema = new Schema({
-  
    email:{type:String,unique:true,lowercase:true},
    password:String
 });
